@@ -12,8 +12,8 @@ base = 'http://app4:5003'
 def home():
     weapon = requests.get(wep + '/weapons')
     character = requests.get(char + '/class')
-    weapon.json().update(character.json())
-    getPower = requests.post(base + '/power',json= weapon.json())
+    char_wep = weapon.text + character.text
+    getPower = requests.post(base + '/power', char_wep)
     power= getPower.text
     return render_template('home.html', power=power)
 
