@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+        app1:
+                image: agrisjakob/app1
+                build: ./app
+                ports:
+                        - target: 5000
+                          published: 5000
+                          protocol: tcp
+        app2:
+                image: agrisjakob/app2
+                build: ./weapons
+                ports:
+                        - target: 5001
+                          published: 5001
+                          protocol: tcp
+        app3:
+                image: agrisjakob/app3
+                build: ./class
+                ports:
+                        - target: 5002
+                          published: 5002
+                          protocol: tcp
+
+        app4:
+                image: agrisjakob/app4
+                build: ./power
+                ports:
+                        - target: 5003
+                          published: 5003
+                          protocol: tcp
