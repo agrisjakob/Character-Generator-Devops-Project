@@ -14,7 +14,7 @@ def home():
     character = requests.get(char + '/class')
     char_id = character.text
     wep_id = weapon.text
-    getPower = requests.post(base + '/power', wep_id + char_id)
+    getPower = requests.post(base + '/power', wep_id[0] + char_id[0])
     power= getPower.text
     return render_template('home.html', power=power)
 
