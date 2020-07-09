@@ -4,6 +4,8 @@ services:
         app1:
                 image: agrisjakob/app1
                 build: ./app
+                environment:
+                  DATABASE_URI: ${DATABASE_URI}
                 ports:
                         - target: 5000
                           published: 5000
