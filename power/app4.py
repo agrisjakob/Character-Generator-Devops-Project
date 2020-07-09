@@ -1,5 +1,5 @@
-import random
 from random import randint
+import random
 from flask import Flask, Response, request, render_template, url_for
 import requests
 app = Flask(__name__)
@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/power', methods=['POST'])
 def power():
     char_info = str(request.data.decode('utf-8'))
-    roll = randint(1,100)
+    roll = random.choice(range(1,101))
     if char_info[0] == char_info[1]:
         if roll > 50:
             base = randint(700,1000)

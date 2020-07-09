@@ -30,7 +30,7 @@ def home():
     addpower = Power(power=power)
     db.session.add(addpower)
     db.session.commit()
-    return render_template('home.html', power=power)
+    return render_template('home.html', power=power, character=char_id, weapon=wep_id)
 
 
 
