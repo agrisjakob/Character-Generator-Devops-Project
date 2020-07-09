@@ -1,18 +1,23 @@
 from flask import Flask, Response, request, render_template, url_for
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from app.models import Power
 import requests
 from os import getenv
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']= str(getenv('DATABASE_URI'))
 
-db = SQLALCHEMY(app)
+db = SQLAlchemy(app)
+
 
 wep = 'http://app2:5001'
 char = 'http://app3:5002'
 base = 'http://app4:5003'
 
+class Power(db.Model):
+    id = db.Column(db.Integer, primary_key =True)
+    power = db.Column(db.Integer, nullable= False)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
@@ -23,7 +28,7 @@ def home():
     getPower = requests.post(base + '/power', wep_id[0] + char_id[0])
     power= getPower.text
     addpower = Power(power=power)
-    db.session.add(user)
+    db.session.add(addpower)
     db.session.commit()
     return render_template('home.html', power=power)
 
