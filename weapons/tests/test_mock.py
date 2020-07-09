@@ -2,7 +2,7 @@ from unittest.mock import patch
 from flask import url_for
 from flask_testing import TestCase
 
-from app3 import app
+from app2 import app
 
 class TestBase(TestCase):
     def create_app(self):
@@ -11,5 +11,5 @@ class TestBase(TestCase):
 class TestResponse(TestBase):
     def test_class(self):
         response = self.client.get('/class')
-        classes = ["1 Barbarian", "2 Rogue","3 Druid","4 Hunter","5 Sorcerer", "6 Shaman"]
-        assert response.data.decode('utf-8') in classes
+        weapons= ["1 Axe", "2 Dagger", "3 Staff", "4 Bow", "5 Wand", "6 Mace"]
+        assert response.data.decode('utf-8') in weapons
