@@ -10,4 +10,11 @@ class TestBase(TestCase):
 
 class TestResponse(TestBase):
 
-    def 
+    def test_power(self):
+        with patch('requests.get') as w:
+            w.return_value.text = "1"
+            with patch('requests.post') as p:
+                p.return_value.text = "11"
+                response = self.client.get(url_for('home'))
+                self.assertIn(b'11', response.data)
+
