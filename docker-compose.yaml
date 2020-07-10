@@ -10,6 +10,9 @@ services:
                         - target: 5000
                           published: 5000
                           protocol: tcp
+                deploy:
+                        mode: replicated
+                        replicas: 3
         app2:
                 image: agrisjakob/app2
                 build: ./weapons
@@ -17,6 +20,9 @@ services:
                         - target: 5001
                           published: 5001
                           protocol: tcp
+                deploy:
+                        mode: replicated
+                        replicas: 3
         app3:
                 image: agrisjakob/app3
                 build: ./class
@@ -24,7 +30,9 @@ services:
                         - target: 5002
                           published: 5002
                           protocol: tcp
-
+                deploy:
+                        mode: replicated
+                        replicas: 3
         app4:
                 image: agrisjakob/app4
                 build: ./power
@@ -32,3 +40,6 @@ services:
                         - target: 5003
                           published: 5003
                           protocol: tcp
+                deploy:
+                        mode: replicated
+                        replicas: 3
