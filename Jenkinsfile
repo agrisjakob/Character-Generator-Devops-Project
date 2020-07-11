@@ -3,7 +3,7 @@ pipeline{
 
 	stages{
 		stage('Tests'){
-			{environment 	
+			environment { 	
 			 TESTING_URI = credentials('TEST_DB_URI')
 			}
 			steps{
