@@ -1,8 +1,11 @@
 pipeline{
 	agent any
-	env.TESTING_URI = credentials('TEST_DB_URI')
+
 	stages{
 		stage('Tests'){
+			{environment 	
+			 TESTING_URI = credentials('TEST_DB_URI')
+			}
 			steps{
 				sh ". /home/jenkins/.jenkins/workspace/char-gen/CI/jenkins/tests.sh"
 			}
