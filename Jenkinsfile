@@ -19,5 +19,10 @@ pipeline{
 				sh ". /home/jenkins/.jenkins/workspace/char-gen/CI/jenkins/build.sh"
 			}
 		}
+		stage('Update and deploy swarm'){
+		steps {
+				sh ". /home/jenkins/.jenkins/workspace/char-gen/CI/jenkins/deploy.sh"
+				}
+		}
 	}
 }
