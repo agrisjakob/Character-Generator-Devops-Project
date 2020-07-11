@@ -1,0 +1,25 @@
+- name: install git
+  apt:
+          pkg:
+                  - git
+          state:
+                  latest
+          update_cache: true
+- name: pull down repo
+  git:
+          repo: https://github.com/agrisjakob/char-gen.git
+          dest: "{{ install_directory }}"
+
+- name: "init swarm"
+  docker_swarm:
+          state: present
+
+- name: "Get swarm info"
+  docker_swarm_info:      
+  register: swarm_info
+
+- name: "Get worker token"
+  add_host:
+          name: "token"
+          value: "{{ swarm_info['swarm_facts']['JoinTokens']['Worker'] }}"
+

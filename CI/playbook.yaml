@@ -1,0 +1,21 @@
+- hosts: all
+  become: yes
+  roles:
+          - common
+- hosts: managers
+  become: yes
+  roles:
+          - master
+- hosts: workers
+  become: yes
+  roles:
+          - workers
+- hosts: managers
+  become: yes
+  roles:
+          - deploy
+
+- hosts: nginx
+  become: yes
+  roles:
+          - nginx
