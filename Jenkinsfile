@@ -1,8 +1,6 @@
 pipeline{
 	agent any
-	environment {
-	    TESTING_URI = credentials('TEST_DB_URI')
-	}
+	env.TESTING_URI = credentials('TEST_DB_URI')
 	stages{
 		stage('Tests'){
 			steps{
