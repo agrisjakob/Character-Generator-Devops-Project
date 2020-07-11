@@ -5,18 +5,24 @@ python3 -m venv venv
 
 pip3 install flask flask-testing pytest pytest-cov requests Werkzeug==0.16.1
 
-cd /home/jenkins/.jenkins/workspace/jonkins/app
+cd app
 
 pytest --cov app1 --cov-report term-missing
 
-cd /home/jenkins/.jenkins/workspace/jonkins/weapons
+cd ..
+
+cd weapons
 
 pytest --cov app2 --cov-report term-missing
 
-cd /home/jenkins/.jenkins/workspace/jonkins/class
+cd ..
+
+cd class
 
 pytest --cov app3 --cov-report term-missing
 
-cd /home/jenkins/.jenkins/workspace/jonkins/power
+cd ..
+
+cd power
 
 pytest --cov app4 --cov-report term-missing
