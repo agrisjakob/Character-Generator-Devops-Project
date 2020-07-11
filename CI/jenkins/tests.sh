@@ -5,6 +5,8 @@ python3 -m venv venv
 
 pip3 install flask flask-testing pytest pytest-cov requests Werkzeug==0.16.1 flask-sqlalchemy pymysql
 
+echo ${TESTING_URI}
+
 cd app
 
 pytest --cov app1 --cov-report term-missing
