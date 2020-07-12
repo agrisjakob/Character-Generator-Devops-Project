@@ -6,7 +6,9 @@ The app's database is hosted on a GCP MySQL server.
 
 ## Resources
 [WebApp](http://34.89.84.81/)
+
 [Trello Board](https://trello.com/b/LAOKAzoo/character-generator)
+
 [Risk Assessment](https://docs.google.com/spreadsheets/d/1yAafiJ76UwzMyKsj6W3heGlLeubrjCGEj5deukhhuLk/edit?usp=sharing)
 
 ## Functionality
