@@ -1,1 +1,1 @@
-This directory stores all the test results for this app
+This directory stores pytest results on the Jenkins VM.
