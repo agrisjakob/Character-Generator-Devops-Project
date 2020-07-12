@@ -22,16 +22,16 @@ The app consists of four services:
 3. Class generator - randomly chooses a class for your character.
 4. Power level - Checks the compatability between your character's class and weapon to determine a power level.
 
-### Core service (app/app1)
+### Core service (/app/app1)
 This service uses get requests to get your character's weapon and class, and then posts the information to service four (power level) to generate your character's power level. It also contains the database structure and configuration.
 
-### Weapon generator
+### Weapon generator (/weapons/app2)
 This service chooses a random weapon out of a list of six, which can be retrieved with a get request.
 
-### Class generator.
+### Class generator (/class/app3)
 This service chooses a random class out of a list of six, which can be retrieved with a get request.
 
-### Power level
+### Power level (/power/app4)
 This service sets your character's power level by assessing the compatability between your weapon and class, which need to be posted to the service. If your weapon and class are compatible (each character is compatible with one weapon and vice versa) then your character is likely to have a higher power level than another character who's weapon and class are not compatible.
 
 ## Architecture
