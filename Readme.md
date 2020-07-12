@@ -36,17 +36,35 @@ This service sets your character's power level by assessing the compatability be
 ### ERD
 This app uses a very simple database, consisting of just one table.
 #### Initial ERD
-![ERD 1.0](https://i.imgur.com/WS5RbJY.jpg?1)
+![ERD 1.0](https://i.imgur.com/AD9C9ZY.png)
 #### Final ERD
 ![ERD 1.1](https://i.imgur.com/2tcxQAH.jpg)
+
+## Testing
+
 
 ## CI Pipeline
 The CI folder contains files and configurations for a fully automated CI pipeline that will detect commits to the master branch, run unit tests, and update and deploy the new app (see image below).
 ![CI Pipeline](https://i.imgur.com/ySTtrdf.png)
 
+## Jenkins VM Set-up
+Jenkins is set-up on a separate GCP VM with Ansible, docker, docker-compose and a python venv with the necessary requirements for unit testing installed.
+The Jenkins server uses a webhook to trigger a pipeline build whenever a change is made to the master branch of this repo. The first step of the build runs unit tests with pytest, followed by building the docker images, using docker-compose and pushing them to my dockerhub repository. The final step uses Ansible to install all the dependencies and requirements on the docker-swarm manager and worker nodes, as well as updates the swarm.
+Additionally, Jenkins credentials are used to safely store passwords and other secret variables.
+
+### Ansible set-up
+In order to use Ansible for configuration management, the Jenkins VM is set-up to be able to SSH into the swarm-manager and worker nodes. 
+#### Ansible inventory
+Ansible recognises IPs in it's own private network, hence to set up connections in the inventory it is enough to refer to each VMs name (as assigned on GCP). This works as a safety measure and means that you do not have to expose the IPs of each VM. 
+#### Ansible roles
+Ansible roles are used to easily configure different machines to meet each machine's specific needs. For example, initiation of the swarm on the swarm manager machine. 
+#### Ansible-vault
+Ansible vault is used to encrypt and store the database URI variable for the CI/deploy task within the CI/deploy/vars/main.yaml. However, in order for Ansible to decrypt this file you must provide the right vault password, which is simply stored in a file outside of the repository on the Jenkins VM.
+
 ## Load balancer
-The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section below for more information).
+The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section above for more information).
 ![Load balancing](https://i.imgur.com/wjcXVxu.png)
+
 
 
 
