@@ -52,7 +52,7 @@ The Jenkins server uses a webhook to trigger a pipeline build whenever a change 
 Additionally, Jenkins credentials are used to safely store passwords and other secret variables.
 
 ### Ansible set-up
-In order to use Ansible for configuration management, the Jenkins VM is set-up to be able to SSH into the swarm-manager and worker nodes. 
+In order to use Ansible for configuration management, the Jenkins VM is set-up to be able to SSH into the swarm-manager and worker nodes. Furthermore, if you wish to set-up your own pipeline, the initialisation-playbook.yaml (rather than playbook.yaml) file should be ran the first time the VM network is set-up, as it includes the necessary configuration to set-up NGINX as a load balancer.
 #### Ansible inventory
 Ansible recognises IPs in it's own private network, hence to set up connections in the inventory it is enough to refer to each VMs name (as assigned on GCP). This works as a safety measure and means that you do not have to expose the IPs of each VM. 
 #### Ansible roles
@@ -61,6 +61,9 @@ Ansible roles are used to easily configure different machines to meet each machi
 Ansible vault is used to encrypt and store the database URI variable for the CI/deploy task within the CI/deploy/vars/main.yaml. However, in order for Ansible to decrypt this file you must provide the right vault password, which is simply stored in a file outside of the repository on the Jenkins VM.
 ## Load balancer
 The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section above for more information).
+Users can indirectly access the app by connecting to the NGINX server, which forwards client requests to the app's services.
+Using NGINX as a load balancer allows for an additional layer of stability, as it is a useful solution for dealing with a high amount of incoming traffic, preventing it from crashing a server, by simply sending the requests to another available server.The load balancer in this case sends requests to the server with the least number of active connections (specified by the 'least_conn' statement in the nginx.conf file. Furthermore, if a server crashes the requests can be sent to an available server.
+The image below represents the use of NGINX as a load balancer for this application. It is ran on a VM outside of the docker-swarm, allowing each node in the swarm to be indirectly accessed, but without having to disclose each node's IP address to the public, mitigating security threats.
 ![Load balancing](https://i.imgur.com/wjcXVxu.png)
 
 ## Testing
