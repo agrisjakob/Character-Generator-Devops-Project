@@ -72,7 +72,14 @@ As previously mentioned the tests essentially cover 100% of the python code with
 ### Integration tests
 While the app could benefit from having integration testing (for example using Selenium to see that the Core service returns the correct html template), I don't believe these tests are currently necessary, due to the extreme simplicity of the app itself.
 
+## Risk Assessment
+### Initial Risk Assessment
+A risk assessment was conducted prior to project start, identifying general web server issues, as well as CI pipeline specific issues (see image below).
+![Initial risk assessment](https://i.imgur.com/Y480Foa.png)
 
+### Risk Assessment Review
+A risk assessment review was conducted after the completion of the project. Overall, no risks had occurred and most of the current mitigations seem to be enough to deal with any issues (see image below).
+![Risk assessment review](https://i.imgur.com/9urRZ8Q.png)
 
 
 
