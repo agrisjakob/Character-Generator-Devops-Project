@@ -88,8 +88,9 @@ A risk assessment review was conducted after the completion of the project. Over
 ![Risk assessment review](https://i.imgur.com/9urRZ8Q.png)
 
 ## Project tracking
-A simple kanban board on Trello was used for project tracking and planning and can be accessed [here](https://trello.com/b/LAOKAzoo/character-generator)
+A simple kanban board on Trello was used for project tracking and planning, as well as user stories, and can be accessed [here](https://trello.com/b/LAOKAzoo/character-generator)
 ![trello](https://i.imgur.com/dtarL2W.png)
+![user story](https://i.imgur.com/LNmNkV9.png)
 
 ## Future improvements
 ### More complexity
