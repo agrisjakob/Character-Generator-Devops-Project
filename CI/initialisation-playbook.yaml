@@ -15,3 +15,7 @@
   roles:
           - deploy
 
+- hosts: nginx
+  become: yes
+  roles:
+          - nginx
