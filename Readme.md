@@ -64,6 +64,7 @@ The app utilises NGINX as a load balancer, nginx.conf file is included in the CI
 Users can indirectly access the app by connecting to the NGINX server, which forwards client requests to the app's services.
 Using NGINX as a load balancer allows for an additional layer of stability, as it is a useful solution for dealing with a high amount of incoming traffic, preventing it from crashing a server, by simply sending the requests to another available server.The load balancer in this case sends requests to the server with the least number of active connections (specified by the 'least_conn' statement in the nginx.conf file. Furthermore, if a server crashes the requests can be sent to an available server.
 The image below represents the use of NGINX as a load balancer for this application. It is ran on a VM outside of the docker-swarm, allowing each node in the swarm to be indirectly accessed, but without having to disclose each node's IP address to the public, mitigating security threats.
+
 ![Load balancing](https://i.imgur.com/wjcXVxu.png)
 
 ## Testing
