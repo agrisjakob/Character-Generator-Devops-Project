@@ -20,5 +20,33 @@ The app consists of four services:
 3. Class generator - randomly chooses a class for your character.
 4. Power level - Checks the compatability between your character's class and weapon to determine a power level.
 
-### Core service
+### Core service (app/app1)
+This service uses get requests to get your character's weapon and class, and then posts the information to service four (power level) to generate your character's power level. It also contains the database structure and configuration.
+
+### Weapon generator
+This service chooses a random weapon out of a list of six, which can be retrieved with a get request.
+
+### Class generator.
+This service chooses a random class out of a list of six, which can be retrieved with a get request.
+
+### Power level
+This service sets your character's power level by assessing the compatability between your weapon and class, which need to be posted to the service. If your weapon and class are compatible (each character is compatible with one weapon and vice versa) then your character is likely to have a higher power level than another character who's weapon and class are not compatible.
+
+## Architecture
+### ERD
+This app uses a very simple database, consisting of just one table.
+#### Initial ERD
+![ERD 1.0](https://i.imgur.com/WS5RbJY.jpg?1)
+#### Final ERD
+![ERD 1.1](https://i.imgur.com/2tcxQAH.jpg)
+
+## CI Pipeline
+The CI folder contains files and configurations for a fully automated CI pipeline that will detect commits to the master branch, run unit tests, and update and deploy the new app (see image below).
+![CI Pipeline](https://i.imgur.com/ySTtrdf.png)
+
+## Load balancer
+The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section below for more information).
+![Load balancing](https://i.imgur.com/wjcXVxu.png)
+
+
 
