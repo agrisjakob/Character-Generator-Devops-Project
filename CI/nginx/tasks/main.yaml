@@ -12,7 +12,15 @@
           dest: /etc/nginx/nginx.conf
   register: nginx_config
 
+- name: start nginx
+  service:
+          name: nginx
+          state: started
 
-
+- name: reload nginx
+  service:
+          name: nginx
+          state: reloaded
+  when: nginx_config.changed
 
 
