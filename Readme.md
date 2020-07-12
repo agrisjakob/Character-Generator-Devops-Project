@@ -1,6 +1,6 @@
 # Character Generator (CG)
 
-CG is a Python web application, consutrcted using the Flask web framework. The app generates a character class, weapon and power level for you to use in a dungeons and dragons game, as you see fit. No registration is required to use the app. The app comes with pre-made unit tests and a fully configured continuous integration pipeline.
+CG is a Python web application, consutrcted using the Flask web framework. The app generates a character class, weapon and power level for you to use in a role-playing game, such as Dungeons and Dragons, as you see fit. No registration is required to use the app. The app comes with pre-made unit tests and a fully configured continuous integration pipeline.
 This app is ran on a Google CLoud Platform Ubuntu 18.04 virtual machine, via docker swarm, using the Python-based HTTP web server Gunicorn.
 The app's database is hosted on a GCP MySQL server.
 
@@ -82,6 +82,17 @@ A risk assessment was conducted prior to project start, identifying general web 
 ### Risk Assessment Review
 A risk assessment review was conducted after the completion of the project. Overall, no risks had occurred and most of the current mitigations seem to be enough to deal with any issues (see image below).
 ![Risk assessment review](https://i.imgur.com/9urRZ8Q.png)
+
+## Project tracking
+A simple kanban board on Trello was used for project tracking and planning and can be accessed [here](https://trello.com/b/LAOKAzoo/character-generator)
+![trello](https://i.imgur.com/dtarL2W.png)
+
+## Future improvements
+### More complexity
+The app is currently very simple and only generates a character and a weapon. This could be expanded upon to generate attributes like a character's class or a weapon enchantment for a more immersive and interesting character.
+
+### Selenium Integration Testing
+While the integration tests don't seem to be currently necessary (due to the app's simplicity as discussed previously), an integration test using Selenium would be a great additional failsafe against the implementation of errors in the code.
 
 
 
