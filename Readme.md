@@ -57,6 +57,9 @@ Ansible recognises IPs in it's own private network, hence to set up connections 
 Ansible roles are used to easily configure different machines to meet each machine's specific needs. For example, initiation of the swarm on the swarm manager machine. 
 #### Ansible-vault
 Ansible vault is used to encrypt and store the database URI variable for the CI/deploy task within the CI/deploy/vars/main.yaml. However, in order for Ansible to decrypt this file you must provide the right vault password, which is simply stored in a file outside of the repository on the Jenkins VM.
+## Load balancer
+The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section above for more information).
+![Load balancing](https://i.imgur.com/wjcXVxu.png)
 
 ## Testing
 The app uses pytest unit tests with essentially a 100% test coverage, as the functionality of each service is completely covered. However, one line is missed in each service's coverage report. The line being: "app.run(debug=True,port=5000, host='0.0.0.0')", as this can't be tested. However, this can be easily overcome by using a different application structure. The results of each test are automatically stored within service_name/test-results folder on the Jenkins VM as a html file, named according to time and date that the test was performed on. For example, the tests for the Class Generator service are stored in class/test-results.
@@ -69,9 +72,6 @@ As previously mentioned the tests essentially cover 100% of the python code with
 ### Integration tests
 While the app could benefit from having integration testing (for example using Selenium to see that the Core service returns the correct html template), I don't believe these tests are currently necessary, due to the extreme simplicity of the app itself.
 
-## Load balancer
-The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section above for more information).
-![Load balancing](https://i.imgur.com/wjcXVxu.png)
 
 
 
