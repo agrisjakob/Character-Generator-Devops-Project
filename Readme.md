@@ -22,16 +22,16 @@ The app consists of four services:
 3. Class generator - randomly chooses a class for your character.
 4. Power level - Checks the compatability between your character's class and weapon to determine a power level.
 
-### Core service (app/app1)
+### Core service (/app/app1)
 This service uses get requests to get your character's weapon and class, and then posts the information to service four (power level) to generate your character's power level. It also contains the database structure and configuration.
 
-### Weapon generator
+### Weapon generator (/weapons/app2)
 This service chooses a random weapon out of a list of six, which can be retrieved with a get request.
 
-### Class generator.
+### Class generator (/class/app3)
 This service chooses a random class out of a list of six, which can be retrieved with a get request.
 
-### Power level
+### Power level (/power/app4)
 This service sets your character's power level by assessing the compatability between your weapon and class, which need to be posted to the service. If your weapon and class are compatible (each character is compatible with one weapon and vice versa) then your character is likely to have a higher power level than another character who's weapon and class are not compatible.
 
 ## Architecture
@@ -44,12 +44,24 @@ This app uses a very simple database, consisting of just one table.
 
 ## CI Pipeline
 The CI folder contains files and configurations for a fully automated CI pipeline that will detect commits to the master branch, run unit tests, and update and deploy the new app (see image below).
-![CI Pipeline](https://i.imgur.com/ySTtrdf.png)
+![CI Pipeline](https://i.imgur.com/BhfrCkg.png)
+
+## Jenkins pipeline
+The Jenkins pipeline has three main stages that occur in this order: testing, updating docker images and updating the docker-swarm. Logs can be easily accessed by mousing over each section and clicking “logs” to see any errors that may have occurred.
+
+![pipeline](https://i.imgur.com/xlV7KBS.png)
+
+![logs](https://i.imgur.com/uCLF1iq.png)
+
+## Pipeline improvements
+Currently, the pipeline takes about 2 minutes to finish, some improvements could be made to shorten this. The final update and deploy step, arguably contains some unnecessary steps that could be moved out of the playbook.yaml file and into the initialisation-playbook.yaml file to shorten build time. For example, the install docker tasks, as each node will already have docker on it.
+
 
 ## Jenkins VM Set-up
 Jenkins is set-up on a separate GCP VM with Ansible, docker, docker-compose and a python venv with the necessary requirements for unit testing installed.
 The Jenkins server uses a webhook to trigger a pipeline build whenever a change is made to the master branch of this repo. The first step of the build runs unit tests with pytest, followed by building the docker images, using docker-compose and pushing them to my dockerhub repository. The final step uses Ansible to install all the dependencies and requirements on the docker-swarm manager and worker nodes, as well as updates the swarm.
 Additionally, Jenkins credentials are used to safely store passwords and other secret variables.
+
 
 ### Ansible set-up
 In order to use Ansible for configuration management, the Jenkins VM is set-up to be able to SSH into the swarm-manager and worker nodes. Furthermore, if you wish to set-up your own pipeline, the initialisation-playbook.yaml (rather than playbook.yaml) file should be ran the first time the VM network is set-up, as it includes the necessary configuration to set-up NGINX as a load balancer.
@@ -63,7 +75,8 @@ Ansible vault is used to encrypt and store the database URI variable for the CI/
 The app utilises NGINX as a load balancer, nginx.conf file is included in the CI/nginx/tasks folder. Furthermore, the initialisation-playbook.yaml file contains the necessary configuration for ansible to install nginx on a fresh VM (see the ansible section above for more information).
 Users can indirectly access the app by connecting to the NGINX server, which forwards client requests to the app's services.
 Using NGINX as a load balancer allows for an additional layer of stability, as it is a useful solution for dealing with a high amount of incoming traffic, preventing it from crashing a server, by simply sending the requests to another available server.The load balancer in this case sends requests to the server with the least number of active connections (specified by the 'least_conn' statement in the nginx.conf file. Furthermore, if a server crashes the requests can be sent to an available server.
-The image below represents the use of NGINX as a load balancer for this application. It is ran on a VM outside of the docker-swarm, allowing each node in the swarm to be indirectly accessed, but without having to disclose each node's IP address to the public, mitigating security threats.
+The image below represents the use of NGINX as a load balancer for this application. It is ran on a VM outside of the docker-swarm, allowing each node in the swarm to be indirectly accessed, but without having to disclose each node's IP address to the public, mitigating security threats. The image below is a representation of load balancing that the app uses, however do note that the app currently uses only one worker and manager node.
+
 ![Load balancing](https://i.imgur.com/wjcXVxu.png)
 
 ## Testing
@@ -87,8 +100,9 @@ A risk assessment review was conducted after the completion of the project. Over
 ![Risk assessment review](https://i.imgur.com/9urRZ8Q.png)
 
 ## Project tracking
-A simple kanban board on Trello was used for project tracking and planning and can be accessed [here](https://trello.com/b/LAOKAzoo/character-generator)
+A simple kanban board on Trello was used for project tracking and planning, as well as user stories, and can be accessed [here](https://trello.com/b/LAOKAzoo/character-generator)
 ![trello](https://i.imgur.com/dtarL2W.png)
+![user story](https://i.imgur.com/LNmNkV9.png)
 
 ## Future improvements
 ### More complexity

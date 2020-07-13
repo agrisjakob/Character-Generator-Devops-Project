@@ -11,5 +11,5 @@ class TestBase(TestCase):
 class TestResponse(TestBase):
     def test_class(self):
         response = self.client.get('/class')
-        classes = ["1 Barbarian", "2 Rogue","3 Druid","4 Hunter","5 Sorcerer", "6 Shaman"]
+        classes = ["1 Barbarian", "2 Rogue","3 Druid","4 Hunter","5 Sorcerer", "6 Shaman","7 Dragoon", "8 Samurai", "9 Tank"]
         assert response.data.decode('utf-8') in classes
