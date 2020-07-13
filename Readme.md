@@ -44,7 +44,7 @@ This app uses a very simple database, consisting of just one table.
 
 ## CI Pipeline
 The CI folder contains files and configurations for a fully automated CI pipeline that will detect commits to the master branch, run unit tests, and update and deploy the new app (see image below).
-![CI Pipeline](https://i.imgur.com/ySTtrdf.png)
+![CI Pipeline](https://i.imgur.com/BhfrCkg.png)
 
 ## Jenkins pipeline
 The Jenkins pipeline has three main stages that occur in this order: testing, updating docker images and updating the docker-swarm. Logs can be easily accessed by mousing over each section and clicking “logs” to see any errors that may have occurred.
