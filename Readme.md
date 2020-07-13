@@ -1,6 +1,6 @@
 # Character Generator (CG)
 
-CG is a Python web application, consutrcted using the Flask web framework. The app generates a character class, weapon and power level for you to use in a role-playing game, such as Dungeons and Dragons, as you see fit. No registration is required to use the app. The app comes with pre-made unit tests and a fully configured continuous integration pipeline.
+CG is a Python web application, constructed using the Flask web framework. The app generates a character class, weapon and power level for you to use in a role-playing game, such as Dungeons and Dragons, as you see fit. No registration is required to use the app. The app comes with pre-made unit tests and a fully configured continuous integration pipeline.
 This app is ran on a Google CLoud Platform Ubuntu 18.04 virtual machine, via docker swarm, using the Python-based HTTP web server Gunicorn.
 The app's database is hosted on a GCP MySQL server.
 
@@ -32,7 +32,7 @@ This service chooses a random weapon out of a list of six, which can be retrieve
 This service chooses a random class out of a list of six, which can be retrieved with a get request.
 
 ### Power level (/power/app4)
-This service sets your character's power level by assessing the compatability between your weapon and class, which need to be posted to the service. If your weapon and class are compatible (each character is compatible with one weapon and vice versa) then your character is likely to have a higher power level than another character who's weapon and class are not compatible.
+This service sets your character's power level by assessing the compatability between your weapon and class, which need to be posted to the service. If your weapon and class are compatible (each class is compatible with one weapon and vice versa) then your character is likely to have a higher power level than another character who's weapon and class are not compatible.
 
 ## Architecture
 ### ERD
