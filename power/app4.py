@@ -10,12 +10,12 @@ def power():
     char_info = str(request.data.decode('utf-8'))
     roll = random.choice(range(1,101))
     if char_info[0] == char_info[1]:
-        if roll > 40:
+        if roll > 50:
             base = randint(700,1000)
         else:
             base = randint(600,900)
     else:
-        if roll > 80:
+        if roll > 90:
             base = randint(500, 800)
         else:
             base = randint(200,600)
