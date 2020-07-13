@@ -11,5 +11,5 @@ class TestBase(TestCase):
 class TestResponse(TestBase):
     def test_class(self):
         response = self.client.get('/weapons')
-        weapons= ["1 Axe", "2 Dagger", "3 Staff", "4 Bow", "5 Wand", "6 Mace"]
+        weapons= ["1 Axe", "2 Dagger", "3 Staff", "4 Bow", "5 Wand", "6 Mace","7 Spear", "8 Sword", "9 Shield"]
         assert response.data.decode('utf-8') in weapons
