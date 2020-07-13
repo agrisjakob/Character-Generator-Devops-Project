@@ -1,15 +1,3 @@
-- hosts: managers, workers
-  become: yes
-  roles:
-          - common
-- hosts: managers
-  become: yes
-  roles:
-          - master
-- hosts: workers
-  become: yes
-  roles:
-          - workers
 - hosts: managers
   become: yes
   roles:
