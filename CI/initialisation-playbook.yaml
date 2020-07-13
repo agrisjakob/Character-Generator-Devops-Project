@@ -1,4 +1,4 @@
-- hosts: managers: workers
+- hosts: managers, workers
   become: yes
   roles:
           - common
