@@ -1,0 +1,155 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service1
+  labels:
+    app: service1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service1
+  template:
+    env:
+      - name: DATABASE_URI
+        value: "mysql+pymysql://root:3255@35.246.116.136/chargen"
+    metadata:
+      labels:
+        app: service1
+    spec:
+      containers:
+      - name: service1
+        image: agrisjakob/app1
+        ports:
+        - name: http-port
+          containerPort: 5000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 5000
+  selector:
+    app: service1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2
+  labels:
+    app: service2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service2
+  template:
+    metadata:
+      labels:
+        app: service2
+    spec:
+      containers:
+      - name: service2
+        image: agrisjakob/app2
+        ports:
+        - name: http-port2
+          containerPort: 5001
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5001
+      targetPort: 5001
+  selector:
+    app: service2
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service3
+  labels:
+    app: service3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service3
+  template:
+    metadata:
+      labels:
+        app: service3
+    spec:
+      containers:
+      - name: service3
+        image: agrisjakob/app3
+        ports:
+        - name: http-port3
+          containerPort: 5002
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service3
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5002
+      targetPort: 5002
+  selector:
+    app: service3
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service4
+  labels:
+    app: service4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service4
+  template:
+    metadata:
+      labels:
+        app: service4
+    spec:
+      containers:
+      - name: service4
+        image: agrisjakob/app4
+        ports:
+        - name: http-port4
+          containerPort: 5003
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service4
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5003
+      targetPort: 5003
+  selector:
+    app: service4
+
+---

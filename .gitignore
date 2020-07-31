@@ -1,3 +1,4 @@
+.terraform
 /pycache
 *.pyc
 /venv/

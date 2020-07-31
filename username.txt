@@ -1,0 +1,1 @@
+mysql+pymysql://root:3255@35.246.116.136/chargen
