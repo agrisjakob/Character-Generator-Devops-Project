@@ -19,13 +19,13 @@ class Power(db.Model):
     power = db.Column(db.Integer, nullable= False)
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    weapon = requests.get(wep + '/weapons')
-    character = requests.get(char + '/class')
+    weapon = requests.get(wep)
+    character = requests.get(char)
     char_id = character.text
     wep_id = weapon.text
-    getPower = requests.post(base + '/power', wep_id[0] + char_id[0])
+    getPower = requests.post(base, wep_id[0] + char_id[0])
     power= getPower.text
     addpower = Power(power=power)
     db.session.add(addpower)

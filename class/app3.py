@@ -5,7 +5,7 @@ from random import randint
 
 app = Flask(__name__)
 
-@app.route('/class', methods=['GET'])
+@app.route('/', methods=['GET'])
 def character():
     classesA = ["1 Barbarian", "2 Rogue","3 Druid","4 Hunter","5 Sorcerer", "6 Shaman", "7 Dragoon", "8 Samurai", "9 Tank", "a Militia", "b Gunslinger", "c Berserker"]
     final_class = random.choice(classesA)

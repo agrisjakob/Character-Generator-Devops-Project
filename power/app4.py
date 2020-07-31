@@ -5,7 +5,7 @@ import requests
 app = Flask(__name__)
 
 
-@app.route('/power', methods=['POST'])
+@app.route('/', methods=['POST'])
 def power():
     char_info = str(request.data.decode('utf-8'))
     roll = random.choice(range(1,101))
